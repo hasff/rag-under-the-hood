@@ -1,0 +1,5 @@
+wikipedia
+openai
+llama-index
+langchain
+langchain_community
