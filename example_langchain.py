@@ -1,5 +1,5 @@
 SEPARATOR_LEN = 80
-print('LangChain Example') 
+print('\nLangChain Example') 
 print(f'\n{'-' * SEPARATOR_LEN}\n')
 
 
@@ -51,11 +51,12 @@ vector_store = InMemoryVectorStore.from_documents(
 
 
 # STEP 5 - QUERY DATA --------------------------------------------------------------------------------------
-query = "What is the atmosphere of Mars made of?"
+query                   = "What is the atmosphere of Mars made of?"
 
-result = vector_store.similarity_search(query, k= 5)
+result                  = vector_store.similarity_search(query, k= 5)
 
-query_related_chunks = "\n\n---\n\n".join([doc.page_content for doc in result])
+
+query_related_chunks    = "\n\n---\n\n".join([doc.page_content for doc in result])
 
 print(f'Query: {query}')
 print(f'\n{'-' * SEPARATOR_LEN}\n')
