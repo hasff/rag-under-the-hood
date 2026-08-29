@@ -1,6 +1,7 @@
 SEPARATOR_LEN = 80
-print('\nLlama Index Example') 
-print(f'\n{'-' * SEPARATOR_LEN}\n')
+print(f'\n{'-' * SEPARATOR_LEN}')
+print('\n🦙 Llama Index Example 🦙') 
+print(f'\n{'-' * SEPARATOR_LEN}')
 
 
 # STEP 1 - LOAD DATA --------------------------------------------------------------------------------------

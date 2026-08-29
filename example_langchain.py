@@ -1,6 +1,7 @@
 SEPARATOR_LEN = 80
-print('\nLangChain Example') 
-print(f'\n{'-' * SEPARATOR_LEN}\n')
+print(f'\n{'-' * SEPARATOR_LEN}')
+print('\n🔗 LangChain Example 🔗') 
+print(f'\n{'-' * SEPARATOR_LEN}')
 
 
 # STEP 1 - LOAD DATA --------------------------------------------------------------------------------------
