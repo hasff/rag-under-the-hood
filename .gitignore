@@ -223,3 +223,9 @@ NOTES.md
 .vscode
 
 /my_notes/
+
+
+# uv
+.python-version
+uv.lock
+pyproject.toml
