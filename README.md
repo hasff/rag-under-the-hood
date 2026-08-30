@@ -60,9 +60,9 @@ Before you dive in, keep a few things in mind:
 - [Requirements](#requirements_)
 - [Setup](#setup_)
 - [Project Structure](#project-structure_)
-* `example_langchain.py`
-* `example_llamaindex.py`
-* LangChain vs LlamaIndex comparison
+- [`example_langchain.py`](#example-langchain_)
+- [`example_llamaindex.py`](#example-llamaindex_)
+- [LangChain vs LlamaIndex comparison](#langchain-vs-llamaindex_)
 - [Conclusions](#conclusions_)
 - [Next Steps & Resources](#next-steps--resources_)
 - [Get in Touch](#get-in-touch_)
@@ -136,7 +136,7 @@ OPENAI_API_KEY="your_key_here"
 
 ## Project structure
 
-#### ⚡ Quick Navigation: [⬅️ Setup](#setup_) | [TODO ➡️](#todo)
+#### ⚡ Quick Navigation: [⬅️ Setup](#setup_) | [`example_langchain.py` ➡️](#example-langchain_)
 
 ```
 langchain-vs-llamaindex-rag-basics/
@@ -150,11 +150,13 @@ langchain-vs-llamaindex-rag-basics/
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
-<a name="_todo_"></a>
+<a name="example-langchain_"></a>
 
 ---
 
 ## `example_langchain.py`
+
+#### ⚡ Quick Navigation: [⬅️ Project structure](#project-structure_) | [`example_llamaindex.py` ➡️](#example-llamaindex_)
 
 TODO: walkthrough of the script (steps 1 through 5), same style as the original README.
 
@@ -173,9 +175,16 @@ python example_langchain.py
 
 TODO: paste example output.
 
+[↑ Back to Table of Contents](#table-of-contents_)
+
+<a name="example-llamaindex_"></a>
+
 ---
 
 ## `example_llamaindex.py`
+
+#### ⚡ Quick Navigation: [⬅️ `example_langchain.py`](#example-langchain_) | [LangChain vs LlamaIndex comparison ➡️](#langchain-vs-llamaindex_)
+
 
 TODO: walkthrough of the script (steps 1 through 5), mirroring the previous section.
 
@@ -194,9 +203,15 @@ python example_llamaindex.py
 
 TODO: paste example output.
 
+[↑ Back to Table of Contents](#table-of-contents_)
+
+<a name="langchain-vs-llamaindex_"></a>
+
 ---
 
 ## LangChain vs LlamaIndex comparison
+
+#### ⚡ Quick Navigation: [⬅️ `example_llamaindex.py`](#example-llamaindex_) | [Conclusions ➡️](#conclusions_)
 
 💡 **Note on chunking**
 
@@ -213,11 +228,15 @@ TODO: comparison table (setup, default chunking, vector store, query API, verbos
 | Query API | `similarity_search` | `as_retriever().retrieve()` |
 
 
+[↑ Back to Table of Contents](#table-of-contents_)
+
 <a name="conclusions_"></a>
 
 ---
 
 ## Conclusions
+
+#### ⚡ Quick Navigation: [⬅️ LangChain vs LlamaIndex comparison](#langchain-vs-llamaindex_) | [Next Steps & Resources ➡️](#next-steps--resources_)
 
 TODO.
 
