@@ -47,7 +47,7 @@ Before you dive in, keep a few things in mind:
 <br>✅ Embeddings with OpenAI
 <br>✅ In memory vector store
 <br>✅ Query and similarity search
-<br>✅ Direct comparison between both frameworks - LangChain vs LlamaIndex
+<br>✅ Direct comparison between both frameworks - 🔗 LangChain vs 🦙 LlamaIndex
 
 <a name="table-of-contents_"></a>
 
@@ -56,10 +56,10 @@ Before you dive in, keep a few things in mind:
 ## Table of Contents
 
 * What this project demonstrates
-* Architecture
-* Requirements
-* Setup
-* Project structure
+- [Project Architecture](#project-architecture_)
+- [Requirements](#requirements_)
+- [Setup](#setup_)
+- [Project Structure](#project-structure_)
 * `example_langchain.py`
 * `example_llamaindex.py`
 * LangChain vs LlamaIndex comparison
@@ -69,7 +69,20 @@ Before you dive in, keep a few things in mind:
 
 ---
 
-## Architecture
+# What this Project demonstrates
+
+
+
+
+[↑ Back to Table of Contents](#table-of-contents_)
+
+<a name="project-architecture_"></a>
+
+---
+
+## Project Architecture
+
+#### ⚡ Quick Navigation: [⬅️ TODO](#todo) | [Requirements ➡️](#requirements_)
 
 TODO: describe the flow shared by both scripts.
 
@@ -79,18 +92,30 @@ TODO: describe the flow shared by both scripts.
 4. Store: save into an in memory vector store.
 5. Query: run the same question against both systems and compare the results.
 
+[↑ Back to Table of Contents](#table-of-contents_)
+
+<a name="requirements_"></a>
+
 ---
 
 ## Requirements
 
+#### ⚡ Quick Navigation: [⬅️ Project Architecture](#project-architecture_) | [Setup ➡️](#setup_)
+
 TODO: confirm versions.
 
 * Python 3.10+
-* OpenAI API key
+* OpenAI API key → [platform.openai.com](https://platform.openai.com/home)
+
+[↑ Back to Table of Contents](#table-of-contents_)
+
+<a name="setup_"></a>
 
 ---
 
 ## Setup
+
+#### ⚡ Quick Navigation: [⬅️ Requirements](#requirements_) | [Project Structure ➡️](#project-structure_)
 
 TODO: adapt from the other README (clone, venv, install, `.env`).
 
@@ -102,9 +127,16 @@ pip install -r requirements.txt
 OPENAI_API_KEY="your_key_here"
 ```
 
+
+[↑ Back to Table of Contents](#table-of-contents_)
+
+<a name="project-structure_"></a>
+
 ---
 
 ## Project structure
+
+#### ⚡ Quick Navigation: [⬅️ Setup](#setup_) | [TODO ➡️](#todo)
 
 ```
 langchain-vs-llamaindex-rag-basics/
@@ -115,6 +147,10 @@ langchain-vs-llamaindex-rag-basics/
 ├── example_langchain.py
 └── example_llamaindex.py
 ```
+
+[↑ Back to Table of Contents](#table-of-contents_)
+
+<a name="_todo_"></a>
 
 ---
 
