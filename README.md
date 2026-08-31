@@ -40,7 +40,7 @@ Before you dive in, keep a few things in mind:
 
 ---
 
-# Key Concepts Demonstrated
+## Key Concepts Demonstrated
 
 ✅ Data loading (Wikipedia)
 <br>✅ Text chunking
@@ -55,7 +55,7 @@ Before you dive in, keep a few things in mind:
 
 ## Table of Contents
 
-* What this project demonstrates
+- [Purpose](#purpose_)
 - [Project Architecture](#project-architecture_)
 - [Requirements](#requirements_)
 - [Setup](#setup_)
@@ -67,11 +67,17 @@ Before you dive in, keep a few things in mind:
 - [Next Steps & Resources](#next-steps--resources_)
 - [Get in Touch](#get-in-touch_)
 
+<a name="purpose_"></a>
+
 ---
 
-# What this Project demonstrates
+## Purpose
 
+#### ⚡ Quick Navigation: [⬅️ Table of Contents](#table-of-contents_) | [Project Architecture ➡️](#project-architecture_)
 
+This is a simple example, not a full framework tutorial. The goal is narrow on purpose: run the same five step RAG flow (load, chunk, embed, store, query) once in LangChain and once in LlamaIndex, using the same data source and the same question, and let the code speak for itself.
+ 
+It's a companion piece to [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer), where every RAG step is built manually, from scratch. Here, those same steps are handed off to a framework, so you can compare "build it yourself" against "let the framework do it" and see where each library's abstractions actually help.
 
 
 [↑ Back to Table of Contents](#table-of-contents_)
@@ -82,7 +88,7 @@ Before you dive in, keep a few things in mind:
 
 ## Project Architecture
 
-#### ⚡ Quick Navigation: [⬅️ TODO](#todo) | [Requirements ➡️](#requirements_)
+#### ⚡ Quick Navigation: [⬅️ Purpose](#purpose_) | [Requirements ➡️](#requirements_)
 
 TODO: describe the flow shared by both scripts.
 
