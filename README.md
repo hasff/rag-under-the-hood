@@ -108,7 +108,7 @@ Both scripts follow the exact same five step flow. Only the library changes.
 
 #### ⚡ Quick Navigation: [⬅️ Project Architecture](#project-architecture_) | [Setup ➡️](#setup_)
 
-TODO: confirm versions.
+What you need before running the scripts.
 
 * Python 3.10+
 * OpenAI API key → [platform.openai.com](https://platform.openai.com/home)
@@ -123,15 +123,101 @@ TODO: confirm versions.
 
 #### ⚡ Quick Navigation: [⬅️ Requirements](#requirements_) | [Project Structure ➡️](#project-structure_)
 
-TODO: adapt from the other README (clone, venv, install, `.env`).
+
+You can run this project with either `pip` or `uv`. Pick whichever you're comfortable with, the two paths below are independent, follow only one.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/hasff/rag-under-the-hood.git
+cd rag-under-the-hood
+```
+
+---
+
+### Option A: pip
+
+#### 2. Create a virtual environment
+
+```bash
+# Windows
+py -m venv venv
+
+# macOS / Linux
+python -m venv venv
+```
+
+```bash
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+```
+
+#### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
+#### 4. Configure environment variables
+
+```bash
+cp .env.example .env
+```
+
+Add your OpenAI API key to `.env`:
+
 ```
 OPENAI_API_KEY="your_key_here"
 ```
+
+> ⚠️ Never commit your .env file. Add it to .gitignore.
+
+---
+
+### Option B: uv
+
+#### 2. Install uv
+
+```bash
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+#### 3. Sync dependencies
+
+```bash
+uv sync
+```
+
+This creates a virtual environment and installs everything from `pyproject.toml` / `uv.lock`. No manual `venv` step needed.
+
+#### 4. Configure environment variables
+
+```bash
+cp .env.example .env
+```
+
+Add your OpenAI API key to `.env`:
+
+```
+OPENAI_API_KEY="your_key_here"
+```
+
+> ⚠️ Never commit your .env file. Add it to .gitignore.
+
+#### 5. Run scripts with uv
+
+```bash
+uv run example_langchain.py
+```
+
+`uv run` auto syncs dependencies before executing, so you don't need to activate anything manually.
 
 
 [↑ Back to Table of Contents](#table-of-contents_)
