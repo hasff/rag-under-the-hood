@@ -90,7 +90,7 @@ It's a companion piece to [legal-doc-rag-summarizer](https://github.com/hasff/le
 
 #### ⚡ Quick Navigation: [⬅️ Purpose](#purpose_) | [Requirements ➡️](#requirements_)
 
-TODO: describe the flow shared by both scripts.
+Both scripts follow the exact same five step flow. Only the library changes.
 
 1. Load: fetch a Wikipedia page (`Mars`) via `wikipedia`.
 2. Chunk: split the text (`chunk_size=800`, `chunk_overlap=100`).
