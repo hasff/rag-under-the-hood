@@ -401,10 +401,21 @@ print(f'Result: \n{query_related_chunks}')
 
 - `query_related_chunks = "\n\n---\n\n".join([doc.page_content for doc in result])` joins the text (`doc.page_content`) of every returned chunk, separated by `---`, for readable printing.
 
+---
+
 ### Run it
 
+**Option A: pip**
+
 ```bash
-python example_langchain.py
+py example_langchain.py         # Windows
+python example_langchain.py     # macOS / Linux
+```
+
+**Option B: uv**
+
+```bash
+uv run example_langchain.py
 ```
 
 TODO: paste example output.
@@ -568,8 +579,17 @@ print(f'Result: \n{query_related_chunks}')
 
 ### Run it
 
+**Option A: pip**
+
 ```bash
-python example_llamaindex.py
+py example_llamaindex.py        # Windows
+python example_llamaindex.py    # macOS / Linux
+```
+
+**Option B: uv**
+
+```bash
+uv run example_llamaindex.py
 ```
 
 TODO: paste example output.
