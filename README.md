@@ -418,7 +418,37 @@ python example_langchain.py     # macOS / Linux
 uv run example_langchain.py
 ```
 
-TODO: paste example output.
+**Output**
+
+```bash
+--------------------------------------------------------------------------------
+
+🔗 LangChain Example 🔗
+
+--------------------------------------------------------------------------------
+Query: What is the atmosphere of Mars made of?
+
+--------------------------------------------------------------------------------
+
+Result: 
+The atmosphere of Mars consists of about 96% carbon dioxide, 1.93% argon and 1.89% nitrogen along with traces of oxygen and water. The atmosphere is quite dusty, containing particulates about 1.5 μm in diameter which give the Martian sky a tawny color when seen from the surface. It may take on a pink hue due to iron oxide particles suspended in it.
+
+---
+
+Mars lost its magnetosphere 4 billion years ago, possibly because of numerous asteroid strikes, so the solar wind interacts directly with the Martian ionosphere, lowering the atmospheric density by stripping away atoms from the outer layer. Both Mars Global Surveyor and Mars Express have detected ionized atmospheric particles trailing off into space behind Mars, and this atmospheric loss is being studied by the MAVEN orbiter. Compared to Earth, the atmosphere of Mars is quite rarefied. Atmospheric pressure on the surface today ranges from a low of 30 Pa (0.0044 psi) on Olympus Mons to over 1,155 Pa (0.1675 psi) in Hellas Planitia, with a mean pressure at the surface level of 600 Pa (0.087 psi). The highest atmospheric density on Mars is equal to that found 35 kilometres (22 mi) above
+
+---
+
+Mars is a terrestrial planet with a surface that consists of minerals containing silicon and oxygen, metals, and other elements that typically make up rock. The Martian surface is primarily composed of tholeiitic basalt, although parts are more silica-rich than typical basalt and may be similar to andesitic rocks on Earth, or silica glass. Regions of low albedo suggest concentrations of plagioclase feldspar, with northern low albedo regions displaying higher than normal concentrations of sheet silicates and high-silicon glass. Parts of the southern highlands include detectable amounts of high-calcium pyroxenes. Localized concentrations of hematite and olivine have been found. Much of the surface is deeply covered by finely grained iron(III) oxide dust.
+
+---
+
+Mars is the fourth planet from the Sun. It is also known as the "Red Planet", for its orange-red appearance. Mars is a desert-like rocky planet with a tenuous atmosphere that is primarily carbon dioxide (CO2). At the average surface level the atmospheric pressure is a few thousandths of Earth's, atmospheric temperature ranges from −153 to 20 °C (−243 to 68 °F), and cosmic radiation is high. Mars retains some water, in the ground as well as thinly in the atmosphere, forming cirrus clouds, fog, frost, larger polar regions of permafrost and ice caps (with seasonal CO2 snow), but no bodies of liquid surface water. Its surface gravity is roughly a third of Earth's or double that of the Moon. Its mean diameter, 6,779 km (4,212 mi), is about half the Earth's, or twice the Moon's, and its surface
+
+---
+
+The environmental conditions on Mars are a challenge to sustaining organic life: the planet has little heat transfer across its surface, it has poor insulation against bombardment by the solar wind due to the absence of a magnetosphere and has insufficient atmospheric pressure to retain water in a liquid form (water instead sublimes to a gaseous state). Mars is nearly, or perhaps totally, geologically dead; the end of volcanic activity has apparently stopped the recycling of chemicals and minerals between the surface and interior of the planet.
+```
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
@@ -592,7 +622,71 @@ python example_llamaindex.py    # macOS / Linux
 uv run example_llamaindex.py
 ```
 
-TODO: paste example output.
+**Output**
+
+```bash
+--------------------------------------------------------------------------------
+
+🦙 Llama Index Example 🦙
+
+--------------------------------------------------------------------------------
+Query: What is the atmosphere of Mars made of?
+
+--------------------------------------------------------------------------------
+
+Result: 
+=== Other features ===
+
+
+== Atmosphere ==
+
+Mars lost its magnetosphere 4 billion years ago, possibly because of numerous asteroid strikes, so the solar wind interacts directly with the Martian ionosphere, lowering the atmospheric density by stripping away atoms from the outer layer. Both Mars Global Surveyor and Mars Express have detected ionized atmospheric particles trailing off into space behind Mars, and this atmospheric loss is being studied by the MAVEN orbiter. Compared to Earth, the atmosphere of Mars is quite rarefied. Atmospheric pressure on the surface today ranges from a low of 30 Pa (0.0044 psi) on Olympus Mons to over 1,155 Pa (0.1675 psi) in Hellas Planitia, with a mean pressure at the surface level of 600 Pa (0.087 psi). The highest atmospheric density on Mars is equal to that found 35 kilometres (22 mi) above Earth's surface. The resulting mean surface pressure is only 0.6% of Earth's 101.3 kPa (14.69 psi). The scale height of the atmosphere is about 10.8 kilometres (6.7 mi), which is higher than Earth's 6 kilometres (3.7 mi), because the surface gravity of Mars is only about 38% of Earth's.
+The atmosphere of Mars consists of about 96% carbon dioxide, 1.93% argon and 1.89% nitrogen along with traces of oxygen and water. The atmosphere is quite dusty, containing particulates about 1.5 μm in diameter which give the Martian sky a tawny color when seen from the surface. It may take on a pink hue due to iron oxide particles suspended in it.
+
+Despite repeated detections of methane on Mars, there is no scientific consensus as to its origin. One suggestion is that methane exists on Mars and that its concentration fluctuates seasonally. The existence of methane could be produced by non-biological process such as serpentinization involving water, carbon dioxide, and the mineral olivine, which is known to be common on Mars, or by Martian life.
+Compared to Earth, its higher concentration of atmospheric CO2 and lower surface pressure may be why sound is attenuated more on Mars, where natural sources are rare apart from the wind. Using acoustic recordings collected by the Perseverance rover, researchers concluded that the speed of sound there is approximately 240 m/s for frequencies below 240 Hz, and 250 m/s for those above.
+Auroras have been detected on Mars. Because Mars lacks a global magnetic field, the types and distribution of auroras there differ from those on Earth; rather than being mostly restricted to polar regions as is the case on Earth, a Martian aurora can encompass the planet. In September 2017, NASA reported radiation levels on the surface of the planet Mars were temporarily doubled, and were associated with an aurora 25 times brighter than any observed earlier, due to a massive, and unexpected, solar storm in the middle of the month.
+
+---
+
+=== Surface geology ===
+
+Mars is a terrestrial planet with a surface that consists of minerals containing silicon and oxygen, metals, and other elements that typically make up rock. The Martian surface is primarily composed of tholeiitic basalt, although parts are more silica-rich than typical basalt and may be similar to andesitic rocks on Earth, or silica glass. Regions of low albedo suggest concentrations of plagioclase feldspar, with northern low albedo regions displaying higher than normal concentrations of sheet silicates and high-silicon glass. Parts of the southern highlands include detectable amounts of high-calcium pyroxenes. Localized concentrations of hematite and olivine have been found. Much of the surface is deeply covered by finely grained iron(III) oxide dust.
+The Phoenix lander returned data showing Martian soil to be slightly alkaline and containing elements such as magnesium, sodium, potassium and chlorine. These nutrients are found in soils on Earth, and are necessary for plant growth. Experiments performed by the lander showed that the Martian soil has a basic pH of 7.7, and contains 0.6% perchlorate by weight, concentrations that are toxic to humans.
+Streaks are common across Mars and new ones appear frequently on steep slopes of craters, troughs, and valleys. The streaks are dark at first and get lighter with age. The streaks can start in a tiny area, then spread out for hundreds of metres. They have been seen to follow the edges of boulders and other obstacles in their path. The commonly accepted hypotheses include that they are dark underlying layers of soil revealed after avalanches of bright dust or dust devils. Several other explanations have been put forward, including those that involve water or even the growth of organisms.
+Environmental radiation levels on the surface are on average 0.64 millisieverts of radiation per day, and significantly less than the radiation of 1.84 millisieverts per day or 22 millirads per day during the flight to and from Mars. For comparison the radiation levels in low Earth orbit, where Earth's space stations orbit, are around 0.5 millisieverts of radiation per day. Hellas Planitia has the lowest surface radiation at about 0.342 millisieverts per day, featuring lava tubes southwest of Hadriacus Mons with potentially levels as low as 0.064 millisieverts per day, comparable to radiation levels during flights on Earth.
+
+
+=== Magnetic characteristics ===
+
+Although Mars has no evidence of a structured global magnetic field, observations show that parts of the planet's crust have been magnetized, suggesting that alternating polarity reversals of its dipole field have occurred in the past. This paleomagnetism of magnetically susceptible minerals is similar to the alternating bands found on Earth's ocean floors. One hypothesis, published in 1999 and re-examined in October 2005 (with the help of the Mars Global Surveyor), is that these bands suggest plate tectonic activity on Mars four billion years ago, before the planetary dynamo ceased to function and the planet's magnetic field faded.
+
+---
+
+=== Internal structure ===
+
+Like Earth, Mars is differentiated into a dense metallic core overlaid by less dense rocky layers. The outermost layer is the crust, which is on average about 42–56 kilometres (26–35 mi) thick, with a minimum thickness of 6 kilometres (3.7 mi) in Isidis Planitia, and a maximum thickness of 117 kilometres (73 mi) in the southern Tharsis plateau. For comparison, Earth's crust averages 27.3 ± 4.8 km in thickness. The most abundant elements in the Martian crust are silicon, oxygen, iron, magnesium, aluminum, calcium, and potassium. Mars is confirmed to be seismically active; in 2019, it was reported that InSight had detected and recorded over 450 marsquakes and related events.
+Beneath the crust is a silicate mantle responsible for many of the tectonic and volcanic features on the planet's surface. The upper Martian mantle is a low-velocity zone, where the velocity of seismic waves is lower than surrounding depth intervals. The mantle appears to be rigid down to the depth of about 250 km, giving Mars a very thick lithosphere compared to Earth. Below this the mantle gradually becomes more ductile, and the seismic wave velocity starts to grow again. The Martian mantle does not appear to have a thermally insulating layer analogous to Earth's lower mantle; instead, below 1050 km in depth, it becomes mineralogically similar to Earth's transition zone. At the bottom of the mantle lies a basal liquid silicate layer approximately 150–180 km thick. The Martian mantle appears to be highly heterogenous, with dense fragments up to 4 km across, likely injected deep into the planet by colossal impacts ~4.5 billion years ago; high-frequency waves from eight marsquakes slowed as they passed these localized regions, and modeling indicates the heterogeneities are compositionally distinct debris preserved because Mars lacks plate tectonics and has a sluggishly convecting interior that prevents complete homogenization.
+Mars's iron and nickel core is at least partially molten, and may have a solid inner core. It is around half of Mars's radius, approximately 1650–1675 km, and is enriched in light elements such as sulfur, oxygen, carbon, and hydrogen. The temperature of the core is estimated to be 2000–2400 K, compared to 5400–6230 K for Earth's solid inner core. Whether or not a solid inner core is present inside Mars remains a topic of active research; a 2023 study using data from the InSight lander suggested the absence of a solid inner core, however a 2025 study based on the same data reported the detection of a solid inner core 613 kilometres (381 mi) ± 67 kilometres (42 mi) in radius.
+
+---
+
+== Habitability and habitation ==
+
+During the late 19th century, it was widely accepted in the astronomical community that Mars had life-supporting qualities, including the presence of oxygen and water. However, in 1894 W. W. Campbell at Lick Observatory observed the planet and found that "if water vapor or oxygen occur in the atmosphere of Mars it is in quantities too small to have been detected by spectroscopes then available". That observation contradicted many of the measurements of the time and was not widely accepted. Campbell and V. M. Slipher repeated the study in 1909 using better instruments, but with the same results. It was not until the findings were confirmed by W. S. Adams in 1925 that the myth of the Earth-like habitability of Mars was finally broken. However, even in the 1960s, articles were published on Martian biology, putting aside explanations other than life for the seasonal changes on Mars.
+The current understanding of planetary habitability – the ability of a world to develop environmental conditions favorable to the emergence of life – favors planets that have liquid water on their surface. Most often this requires the orbit of a planet to lie within the habitable zone, which for the Sun is estimated to extend from within the orbit of Earth to about that of Mars. During perihelion, Mars dips inside this region, but Mars's thin (low-pressure) atmosphere prevents liquid water from existing over large regions for extended periods. The past flow of liquid water demonstrates the planet's potential for habitability. Recent evidence has suggested that any water on the Martian surface may have been too salty and acidic to support regular terrestrial life.
+The environmental conditions on Mars are a challenge to sustaining organic life: the planet has little heat transfer across its surface, it has poor insulation against bombardment by the solar wind due to the absence of a magnetosphere and has insufficient atmospheric pressure to retain water in a liquid form (water instead sublimes to a gaseous state). Mars is nearly, or perhaps totally, geologically dead; the end of volcanic activity has apparently stopped the recycling of chemicals and minerals between the surface and interior of the planet.
+Evidence suggests that the planet was once significantly more habitable than it is today, but whether living organisms ever existed there remains unknown. The Viking probes of the mid-1970s carried experiments designed to detect microorganisms in Martian soil at their respective landing sites and had positive results, including a temporary increase in CO2 production on exposure to water and nutrients. This sign of life was later disputed by scientists, resulting in a continuing debate, with NASA scientist Gilbert Levin asserting that Viking may have found life. A 2014 analysis of Martian meteorite EETA79001 found chlorate, perchlorate, and nitrate ions in sufficiently high concentrations to suggest that they are widespread on Mars. UV and X-ray radiation would turn chlorate and perchlorate ions into other, highly reactive oxychlorines, indicating that any organic molecules would have to be buried under the surface to survive.
+Small quantities of methane and formaldehyde detected by Mars orbiters are both claimed to be possible evidence for life, as these chemical compounds would quickly break down in the Martian atmosphere. Alternatively, these compounds may instead be replenished by volcanic or other geological means, such as serpentinite. Impact glass, formed by the impact of meteors, which on Earth can preserve signs of life, has also been found on the surface of the impact craters on Mars. Likewise, the glass in impact craters on Mars could have preserved signs of life, if life existed at the site.
+
+---
+
+Mars is the fourth planet from the Sun. It is also known as the "Red Planet", for its orange-red appearance. Mars is a desert-like rocky planet with a tenuous atmosphere that is primarily carbon dioxide (CO2). At the average surface level the atmospheric pressure is a few thousandths of Earth's, atmospheric temperature ranges from −153 to 20 °C (−243 to 68 °F), and cosmic radiation is high. Mars retains some water, in the ground as well as thinly in the atmosphere, forming cirrus clouds, fog, frost, larger polar regions of permafrost and ice caps (with seasonal CO2 snow), but no bodies of liquid surface water. Its surface gravity is roughly a third of Earth's or double that of the Moon. Its mean diameter, 6,779 km (4,212 mi), is about half the Earth's, or twice the Moon's, and its surface area is the size of all the dry land of Earth.
+Fine dust is prevalent across the surface and the atmosphere, being picked up and spread at the low Martian gravity even by the weak wind of the tenuous atmosphere.
+The terrain of Mars roughly follows a north–south divide, the Martian dichotomy, with the northern hemisphere mainly consisting of relatively flat, low lying plains, and the southern hemisphere of cratered highlands. Geologically, the planet is fairly active with marsquakes trembling underneath the ground, but also hosts many enormous volcanoes that are extinct (the tallest is Olympus Mons, 21.9 km or 13.6 mi tall), as well as one of the largest canyons in the Solar System (Valles Marineris, 4,000 km or 2,500 mi long). Mars has two natural satellites that are small and irregular in shape: Phobos and Deimos. With a significant axial tilt of 25 degrees, Mars experiences seasons, like Earth (which has an axial tilt of 23.5 degrees). A Martian solar year is equal to 1.88 Earth years (687 Earth days), a Martian solar day (sol) is equal to 24.6 hours.
+Mars formed along with the other planets approximately 4.5 billion years ago. During the martian Noachian period (4.5 to 3.5 billion years ago), its surface was marked by meteor impacts, valley formation, erosion, the possible presence of water oceans and the loss of its magnetosphere. The Hesperian period (beginning 3.5 billion years ago and ending 3.3–2.9 billion years ago) was dominated by widespread volcanic activity and flooding that carved immense outflow channels. The Amazonian period, which continues to the present, is the currently dominating and remaining influence on geological processes. Because of Mars's geological history, the possibility of past or present life on Mars remains an area of active scientific investigation, with some possible traces needing further examination.
+Being visible with the naked eye in Earth's sky as a red wandering star, Mars has been observed throughout history, acquiring diverse associations in different cultures. In 1963 the first flight to Mars took place with Mars 1, but communication was lost en route. The first successful flyby exploration of Mars was conducted in 1965 with Mariner 4. In 1971 Mariner 9 entered orbit around Mars, being the first spacecraft to orbit any body other than the Moon, Sun or Earth; following in the same year were the first uncontrolled impact (Mars 2) and first successful landing (Mars 3) on Mars. Probes have been active on Mars continuously since 1997.
+```
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
