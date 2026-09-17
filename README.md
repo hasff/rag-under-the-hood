@@ -19,7 +19,7 @@ So you grab a Wikipedia page about Mars, split it into chunks, embed it, index i
 
 Then you do the exact same thing again, this time with a different framework, and compare what comes back.
 
-That's this whole project. Same data, same question, two frameworks, side by side.
+That's this whole project. Same data, same question, two frameworks, side by side: 🔗 LangChain vs 🦙 LlamaIndex.
 
 This is also a companion piece to my [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer) project, where every RAG step (chunking, embeddings, vector search, BM25, hybrid retrieval) is built manually, from scratch. Here, the same steps are handed off to LangChain and LlamaIndex, so you can see what a framework does for you versus what you'd otherwise build yourself.
 
