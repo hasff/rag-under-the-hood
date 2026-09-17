@@ -250,14 +250,150 @@ langchain-vs-llamaindex-rag-basics/
 
 #### ⚡ Quick Navigation: [⬅️ Project structure](#project-structure_) | [`example_llamaindex.py` ➡️](#example-llamaindex_)
 
-TODO: walkthrough of the script (steps 1 through 5), same style as the original README.
-
-Steps covered:
+### Steps covered:
 1. Load data (`Document`, `wikipedia`)
 2. Chunking (`RecursiveCharacterTextSplitter`)
 3. Embedding model (`OpenAIEmbeddings`)
 4. In memory vector store (`InMemoryVectorStore`)
 5. Query (`similarity_search`)
+
+---
+
+### Step 1 - Load Data
+
+📒 We load a Wikipedia page (Mars) and wrap it in a `Document` object, the standard entry point LangChain uses for any RAG pipeline.
+
+<a name="step-1-code-langchain_"></a>
+> Compare with [🦙 LlamaIndex Step 1](#step-1-code-llamaindex_)
+
+```python
+# STEP 1 - LOAD DATA --------------------------------------------------------------------------------------
+import wikipedia
+wikipedia.set_user_agent("langchain-wiki-example/1.0 (example@mail.com)")
+from langchain_core.documents import Document
+
+
+page        = wikipedia.page(title="Mars", auto_suggest=False)
+document    = Document(page_content=page.content, metadata={"title": page.title, "url": page.url})
+```
+
+- `import wikipedia` brings in the library that makes the request to Wikipedia. 
+
+- `wikipedia.set_user_agent` identifies the script to the Wikipedia API, good practice to avoid getting blocked. 
+
+- `Document` comes from `langchain_core.documents`, the class LangChain uses to represent any unit of content throughout the pipeline.
+
+- `page = wikipedia.page(title="Mars", auto_suggest=False)` fetches the page with the exact title "Mars". `auto_suggest=False` makes sure no automatic title correction happens, which could otherwise return a different page than intended.
+
+- `document = Document(page_content=page.content, metadata={...})` wraps the page text (`page_content`) together with metadata (`title`, `url`). This metadata travels with the document and, later, with every chunk generated from it.
+
+---
+
+### Step 2 - Chunking
+
+📒 We split the full page text into smaller, overlapping pieces using LangChain's native `RecursiveCharacterTextSplitter`.
+
+<a name="step-2-code-langchain_"></a>
+> Compare with [🦙 LlamaIndex Step 2](#step-2-code-llamaindex_)
+
+```python
+# STEP 2 - CHUNKING ----------------------------------------------------------------------------------------
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+
+splitter    = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
+chunks      = splitter.split_documents([document])
+```
+
+- `RecursiveCharacterTextSplitter` comes from `langchain_text_splitters`. It is a character based splitter, not a sentence based one.
+
+- `splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)` sets the size of each chunk (800 characters) and the overlap between consecutive chunks (100 characters), the same overlap logic used in the manual `legal-doc-rag-summarizer` project.
+
+- `chunks = splitter.split_documents([document])` takes a list of `Document` objects and returns a list of smaller `Document` objects, each one already carrying the original document's metadata (`title`, `url`) copied automatically.
+
+---
+
+### Step 3 - Embedding Model
+
+📒 We set up the OpenAI embedding model, responsible for turning each chunk into a vector.
+
+<a name="step-3-code-langchain_"></a>
+> Compare with [🦙 LlamaIndex Step 3](#step-3-code-llamaindex_)
+
+```python
+# STEP 3 - EMBEDDING MODEL ---------------------------------------------------------------------------------
+from langchain_openai import OpenAIEmbeddings
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+
+embeddings_model = OpenAIEmbeddings()
+```
+
+- `OpenAIEmbeddings` comes from `langchain_openai`. 
+
+- `load_dotenv` comes from `python dotenv`, `load_dotenv()` reads the `.env` file and exposes `OPENAI_API_KEY` to the process.
+
+- `embeddings_model = OpenAIEmbeddings()` creates the instance that will generate the vectors, using OpenAI's default embedding model. This is the same step that, in the manual project, was done for free with a local HuggingFace model. Here, the framework hides that same step behind a different class name, but the underlying tradeoff (free and local versus paid and remote) does not go away.
+
+---
+
+### Step 4 - In Memory Vector Store
+
+📒 We store the chunks and their vectors in an in memory vector store, ready to be searched.
+
+<a name="step-4-code-langchain_"></a>
+> Compare with [🦙 LlamaIndex Step 4](#step-4-code-llamaindex_)
+
+```python
+# STEP 4 - EMBEDDING + In Memory Store ----------------------------------------------------------------------
+from langchain_core.vectorstores import InMemoryVectorStore
+
+
+vector_store = InMemoryVectorStore.from_documents(
+    documents= chunks,
+    embedding= embeddings_model
+)
+```
+
+- `InMemoryVectorStore` comes from `langchain_core.vectorstores`.
+
+- `InMemoryVectorStore.from_documents(documents=chunks, embedding=embeddings_model)` is a class method that does everything in one step: 
+    1) it embeds every chunk with `embeddings_model` and 
+    2) stores the result (text, vector and metadata) in an index kept in memory. 
+
+    ⚠️ There is no separate "generate embeddings" step followed by "store them"; LangChain merges both into one idiomatic call.
+
+---
+
+### Step 5 - Query
+
+📒 We ask the vector store the same question and look at which chunks come back.
+
+<a name="step-5-code-langchain_"></a>
+> Compare with [🦙 LlamaIndex Step 5](#step-5-code-llamaindex_)
+
+```python
+# STEP 5 - QUERY DATA --------------------------------------------------------------------------------------
+query                   = "What is the atmosphere of Mars made of?"
+
+result                  = vector_store.similarity_search(query, k= 5)
+
+
+query_related_chunks    = "\n\n---\n\n".join([doc.page_content for doc in result])
+
+print(f'Query: {query}')
+print(f'\n{'-' * SEPARATOR_LEN}\n')
+print(f'Result: \n{query_related_chunks}')
+```
+
+- `query` is the plain text question.
+
+- `vector_store.similarity_search(query, k=5)` embeds the query internally and returns the 5 `Document` objects (chunks) with the highest similarity. All the query embedding and similarity comparison work stays hidden inside this single method.
+
+- `query_related_chunks = "\n\n---\n\n".join([doc.page_content for doc in result])` joins the text (`doc.page_content`) of every returned chunk, separated by `---`, for readable printing.
 
 ### Run it
 

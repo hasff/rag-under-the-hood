@@ -34,7 +34,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-embeddings_model = OpenAIEmbeddings() # HuggingFace Trans
+embeddings_model = OpenAIEmbeddings()
 # ----------------------------------------------------------------------------------------------------------
 
 
