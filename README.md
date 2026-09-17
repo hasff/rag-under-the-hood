@@ -124,7 +124,7 @@ What you need before running the scripts.
 #### ⚡ Quick Navigation: [⬅️ Requirements](#requirements_) | [Project Structure ➡️](#project-structure_)
 
 
-You can run this project with either `pip` or `uv`. Pick whichever you're comfortable with, the two paths below are independent, follow only one.
+You can run this project with either `Option A: pip` or `Option B: uv`. Pick whichever you're comfortable with, the two paths below are independent, follow only one.
 
 ### 1. Clone the repository
 
@@ -251,19 +251,21 @@ langchain-vs-llamaindex-rag-basics/
 #### ⚡ Quick Navigation: [⬅️ Project structure](#project-structure_) | [`example_llamaindex.py` ➡️](#example-llamaindex_)
 
 ### Steps covered:
-1. Load data (`Document`, `wikipedia`)
-2. Chunking (`RecursiveCharacterTextSplitter`)
-3. Embedding model (`OpenAIEmbeddings`)
-4. In memory vector store (`InMemoryVectorStore`)
-5. Query (`similarity_search`)
+1. [Load data (`Document`, `wikipedia`)](#step-1-code-langchain_)<br>
+2. [Chunking (`RecursiveCharacterTextSplitter`)](#step-2-code-langchain_)<br>
+3. [Embedding model (`OpenAIEmbeddings`)](#step-3-code-langchain_)<br>
+4. [In memory vector store (`InMemoryVectorStore`)](#step-4-code-langchain_)<br>
+5. [Query (`similarity_search`)](#step-5-code-langchain_)
+
+<a name="step-1-code-langchain_"></a>
 
 ---
 
-### Step 1 - Load Data
+
+### 🔗 Step 1 - Load Data
 
 📒 We load a Wikipedia page (Mars) and wrap it in a `Document` object, the standard entry point LangChain uses for any RAG pipeline.
 
-<a name="step-1-code-langchain_"></a>
 > Compare with [🦙 LlamaIndex Step 1](#step-1-code-llamaindex_)
 
 ```python
@@ -287,13 +289,14 @@ document    = Document(page_content=page.content, metadata={"title": page.title,
 
 - `document = Document(page_content=page.content, metadata={...})` wraps the page text (`page_content`) together with metadata (`title`, `url`). This metadata travels with the document and, later, with every chunk generated from it.
 
+<a name="step-2-code-langchain_"></a>
+
 ---
 
-### Step 2 - Chunking
+### 🔗 Step 2 - Chunking
 
 📒 We split the full page text into smaller, overlapping pieces using LangChain's native `RecursiveCharacterTextSplitter`.
 
-<a name="step-2-code-langchain_"></a>
 > Compare with [🦙 LlamaIndex Step 2](#step-2-code-llamaindex_)
 
 ```python
@@ -311,13 +314,14 @@ chunks      = splitter.split_documents([document])
 
 - `chunks = splitter.split_documents([document])` takes a list of `Document` objects and returns a list of smaller `Document` objects, each one already carrying the original document's metadata (`title`, `url`) copied automatically.
 
+<a name="step-3-code-langchain_"></a>
+
 ---
 
-### Step 3 - Embedding Model
+### 🔗 Step 3 - Embedding Model
 
 📒 We set up the OpenAI embedding model, responsible for turning each chunk into a vector.
 
-<a name="step-3-code-langchain_"></a>
 > Compare with [🦙 LlamaIndex Step 3](#step-3-code-llamaindex_)
 
 ```python
@@ -338,13 +342,14 @@ embeddings_model = OpenAIEmbeddings()
 
 - `embeddings_model = OpenAIEmbeddings()` creates the instance that will generate the vectors, using OpenAI's default embedding model. This is the same step that, in the manual project, was done for free with a local HuggingFace model. Here, the framework hides that same step behind a different class name, but the underlying tradeoff (free and local versus paid and remote) does not go away.
 
+<a name="step-4-code-langchain_"></a>
+
 ---
 
-### Step 4 - In Memory Vector Store
+### 🔗 Step 4 - In Memory Vector Store
 
 📒 We store the chunks and their vectors in an in memory vector store, ready to be searched.
 
-<a name="step-4-code-langchain_"></a>
 > Compare with [🦙 LlamaIndex Step 4](#step-4-code-llamaindex_)
 
 ```python
@@ -366,13 +371,14 @@ vector_store = InMemoryVectorStore.from_documents(
 
     ⚠️ There is no separate "generate embeddings" step followed by "store them"; LangChain merges both into one idiomatic call.
 
+<a name="step-5-code-langchain_"></a>
+
 ---
 
-### Step 5 - Query
+### 🔗 Step 5 - Query
 
 📒 We ask the vector store the same question and look at which chunks come back.
 
-<a name="step-5-code-langchain_"></a>
 > Compare with [🦙 LlamaIndex Step 5](#step-5-code-llamaindex_)
 
 ```python
