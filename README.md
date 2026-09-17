@@ -419,15 +419,152 @@ TODO: paste example output.
 
 #### ⚡ Quick Navigation: [⬅️ `example_langchain.py`](#example-langchain_) | [LangChain vs LlamaIndex comparison ➡️](#langchain-vs-llamaindex_)
 
+### Steps covered:
+1. [Load data (`Document`, `wikipedia`)](#step-1-code-llamaindex_)<br>
+2. [Chunking (`SentenceSplitter`)](#step-2-code-llamaindex_)<br>
+3. [Embedding model (`OpenAIEmbeddings`)](#step-3-code-llamaindex_)<br>
+4. [In memory index (`VectorStoreIndex`)](#step-4-code-llamaindex_)<br>
+5. [Query (`as_retriever` + `retrieve`)](#step-5-code-llamaindex_)
 
-TODO: walkthrough of the script (steps 1 through 5), mirroring the previous section.
+<a name="step-1-code-llamaindex_"></a>
 
-Steps covered:
-1. Load data (`Document`, `wikipedia`)
-2. Chunking (`SentenceSplitter`)
-3. Embedding model (`OpenAIEmbedding`)
-4. In memory index (`VectorStoreIndex`)
-5. Query (`as_retriever` + `retrieve`)
+---
+
+### 🦙 Step 1 - Load Data
+
+📒 We load the same Wikipedia page (Mars) and wrap it in a `Document` object, now using LlamaIndex's own class.
+
+> Compare with [🔗 LangChain Step 1](#step-1-code-langchain_)
+
+```python
+# STEP 1 - LOAD DATA ----------------------------------------------------------------------------
+import wikipedia
+wikipedia.set_user_agent("langchain-wiki-example/1.0 (example@mail.com)")
+from llama_index.core import Document
+ 
+ 
+page        = wikipedia.page(title="Mars", auto_suggest=False)
+document    = Document(text=page.content, metadata={"title": page.title, "url": page.url})
+```
+
+- `import wikipedia` and `set_user_agent` are exactly the same as in the LangChain example, the only difference in this import section is where `Document` comes from, here `llama_index.core`.
+
+- `page = wikipedia.page(title="Mars", auto_suggest=False)` is identical to the LangChain example, same page, same `auto_suggest=False`.
+
+- `document = Document(text=page.content, metadata={...})` wraps the text and metadata the same conceptual way, but the text parameter is called `text` instead of `page_content`. Same idea, different naming between libraries.
+
+<a name="step-2-code-llamaindex_"></a>
+
+---
+
+### 🦙 Step 2 - Chunking
+
+📒 We split the text into nodes using LlamaIndex's native `SentenceSplitter`, which respects sentence boundaries instead of cutting at a fixed character count.
+
+> Compare with [🔗 LangChain Step 2](#step-2-code-langchain_)
+
+```python
+# STEP 2 - CHUNKING ------------------------------------------------------------------------------
+from llama_index.core.node_parser import SentenceSplitter
+ 
+ 
+splitter    = SentenceSplitter(chunk_size=800, chunk_overlap=100)
+nodes       = splitter.get_nodes_from_documents([document])
+```
+
+- `SentenceSplitter` comes from `llama_index.core.node_parser`. Unlike LangChain's `RecursiveCharacterTextSplitter`, this splitter divides by sentence, always trying to end a chunk at a valid sentence boundary. <br> ⚠️ Its default splitting regex already accounts for Chinese and Japanese sentence-ending punctuation (`。？！`) alongside the Latin ones, so those two are not a blind spot. Thai is a different story: it traditionally has no punctuation marking the end of a sentence at all, so a punctuation-based splitter like this one has no reliable signal to work with there, the same caveat already covered in the sentence-based row of the chunking strategies table in `legal-doc-rag-summarizer`.
+
+- `splitter = SentenceSplitter(chunk_size=800, chunk_overlap=100)` reuses the same numbers as the LangChain example, (🚨**ATENTION THIS ONE IS TRICKY**🚨), but here `chunk_size` and `chunk_overlap` are counted in tokens, not characters, and definitely not sentences either, even though the class name `SentenceSplitter`  might suggest otherwise. LlamaIndex's `SentenceSplitter` uses a tokenizer internally (by default a GPT2 style tokenizer) to measure each split. This makes the "800" here a very different quantity from the "800" in the LangChain example: 800 tokens is typically well over 3000 characters of English text, not 800 characters. On top of that, the splitter also prefers not to cut a sentence midway, which pushes the actual chunk boundaries around even more. Same numbers on the page, different unit entirely.
+
+
+- `nodes = splitter.get_nodes_from_documents([document])` returns a list of nodes, LlamaIndex's term for what LangChain calls chunks (`Document` objects).
+
+<a name="step-3-code-llamaindex_"></a>
+
+---
+
+### 🦙 Step 3 - Embedding Model
+
+📒 We set up the OpenAI embedding model, now using LlamaIndex's own class.
+
+> Compare with [🔗 LangChain Step 3](#step-3-code-langchain_)
+
+```python
+# STEP 3 - EMBEDDING MODEL -----------------------------------------------------------------------
+from llama_index.embeddings.openai import OpenAIEmbedding
+from dotenv import load_dotenv
+ 
+ 
+load_dotenv()
+ 
+ 
+embeddings_model = OpenAIEmbedding()
+```
+
+- `OpenAIEmbedding` comes from `llama_index.embeddings.openai`. Note the singular name, unlike the plural `OpenAIEmbeddings` used in the LangChain example, even though both do the same job.
+
+- `load_dotenv()` is identical to the LangChain example, it reads `.env` and exposes `OPENAI_API_KEY`.
+
+- `embeddings_model = OpenAIEmbedding()` creates the default instance of the embedding model, the functional equivalent of Step 3 in LangChain.
+
+<a name="step-4-code-llamaindex_"></a>
+
+---
+
+### 🦙 Step 4 - In Memory Index
+
+📒 We build the in memory vector index from the nodes, a single step that both embeds and stores at once.
+
+> Compare with [🔗 LangChain Step 4](#step-4-code-langchain_)
+
+```python
+# STEP 4 - EMBEDDING + In Memory Store ------------------------------------------------------------
+from llama_index.core import VectorStoreIndex
+ 
+ 
+index = VectorStoreIndex(
+    nodes= nodes,
+    embed_model= embeddings_model
+)
+```
+
+- `VectorStoreIndex` comes from `llama_index.core`.
+
+- `VectorStoreIndex(nodes=nodes, embed_model=embeddings_model)` is the direct equivalent of LangChain's `InMemoryVectorStore.from_documents(...)`: it takes the nodes (LlamaIndex's name for what LangChain calls chunks), embeds each one with `embeddings_model`, and stores everything in an in memory index. The naming changes (🦙`index` instead of 🔗`vector_store`), but the role in the pipeline is the same.
+
+<a name="step-5-code-llamaindex_"></a>
+
+---
+
+### 🦙 Step 5 - Query
+
+📒 We ask the index the same question, through a retriever, and compare the nodes that come back.
+
+> Compare with [🔗 LangChain Step 5](#step-5-code-langchain_)
+
+```python
+# STEP 5 - QUERY DATA ----------------------------------------------------------------------------
+query                   = "What is the atmosphere of Mars made of?"
+ 
+retriever               = index.as_retriever(similarity_top_k=5)
+result                  = retriever.retrieve(query)
+ 
+query_related_chunks    = "\n\n---\n\n".join([node.get_content() for node in result])
+ 
+print(f'Query: {query}')
+print(f'\n{"-" * SEPARATOR_LEN}\n')
+print(f'Result: \n{query_related_chunks}')
+```
+
+- `query` is the same plain text question used in the LangChain example.
+
+- `retriever = index.as_retriever(similarity_top_k=5)` is an explicit step LangChain does not separate out: here we first build a retriever from the index, setting `similarity_top_k=5` for how many results we want. In LangChain this step stays hidden inside `similarity_search`.
+
+- `result = retriever.retrieve(query)` embeds the query internally and returns the 5 most relevant nodes.
+
+- `query_related_chunks = "\n\n---\n\n".join([node.get_content() for node in result])` extracts the text of every node with `get_content()` and joins the results with `---`, the same printing pattern used in the LangChain example.
+
+---
 
 ### Run it
 
