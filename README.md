@@ -269,7 +269,7 @@ langchain-vs-llamaindex-rag-basics/
 > Compare with [🦙 LlamaIndex Step 1](#step-1-code-llamaindex_)
 
 ```python
-# STEP 1 - LOAD DATA -------------------------------------------------------------------------------
+# STEP 1 - LOAD DATA ----------------------------------------------------------------------------
 import wikipedia
 wikipedia.set_user_agent("langchain-wiki-example/1.0 (example@mail.com)")
 from langchain_core.documents import Document
@@ -300,7 +300,7 @@ document    = Document(page_content=page.content, metadata={"title": page.title,
 > Compare with [🦙 LlamaIndex Step 2](#step-2-code-llamaindex_)
 
 ```python
-# STEP 2 - CHUNKING ---------------------------------------------------------------------------------
+# STEP 2 - CHUNKING ------------------------------------------------------------------------------
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
@@ -325,7 +325,7 @@ chunks      = splitter.split_documents([document])
 > Compare with [🦙 LlamaIndex Step 3](#step-3-code-llamaindex_)
 
 ```python
-# STEP 3 - EMBEDDING MODEL --------------------------------------------------------------------------
+# STEP 3 - EMBEDDING MODEL -----------------------------------------------------------------------
 from langchain_openai import OpenAIEmbeddings
 from dotenv import load_dotenv
 
@@ -353,7 +353,7 @@ embeddings_model = OpenAIEmbeddings()
 > Compare with [🦙 LlamaIndex Step 4](#step-4-code-llamaindex_)
 
 ```python
-# STEP 4 - EMBEDDING + In Memory Store ---------------------------------------------------------------
+# STEP 4 - EMBEDDING + In Memory Store ------------------------------------------------------------
 from langchain_core.vectorstores import InMemoryVectorStore
 
 
@@ -382,7 +382,7 @@ vector_store = InMemoryVectorStore.from_documents(
 > Compare with [🦙 LlamaIndex Step 5](#step-5-code-llamaindex_)
 
 ```python
-# STEP 5 - QUERY DATA --------------------------------------------------------------------------------------
+# STEP 5 - QUERY DATA ----------------------------------------------------------------------------
 query                   = "What is the atmosphere of Mars made of?"
 
 result                  = vector_store.similarity_search(query, k= 5)
