@@ -401,9 +401,13 @@ print(f'Result: \n{query_related_chunks}')
 
 - `query_related_chunks = "\n\n---\n\n".join([doc.page_content for doc in result])` joins the text (`doc.page_content`) of every returned chunk, separated by `---`, for readable printing.
 
+<a name="run-it-langchain_"></a>
+
 ---
 
 ### Run it
+
+> Compare with [🦙 LlamaIndex Run It](#run-it-llamaindex_)
 
 **Option A: pip**
 
@@ -605,9 +609,13 @@ print(f'Result: \n{query_related_chunks}')
 
 - `query_related_chunks = "\n\n---\n\n".join([node.get_content() for node in result])` extracts the text of every node with `get_content()` and joins the results with `---`, the same printing pattern used in the LangChain example.
 
+<a name="run-it-llamaindex_"></a>
+
 ---
 
 ### Run it
+
+> Compare with [🔗 LangChain Run It](#run-it-langchain_)
 
 **Option A: pip**
 
