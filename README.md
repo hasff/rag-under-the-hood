@@ -289,6 +289,12 @@ document    = Document(page_content=page.content, metadata={"title": page.title,
 
 - `document = Document(page_content=page.content, metadata={...})` wraps the page text (`page_content`) together with metadata (`title`, `url`). This metadata travels with the document and, later, with every chunk generated from it.
 
+<br>
+
+> 🗺️ legal-doc-rag-summarizer [Part 01 - The Naive Approach: Sending the Whole PDF to Claude](https://github.com/hasff/legal-doc-rag-summarizer#part-1)
+>
+> Note that `legal-doc-rag-summarizer` works with uploaded PDF files rather than a Wikipedia page, so `extract_text_from_pdf` plays the role `wikipedia.page()` plays here. The manual project even needs `pdfplumber` to pull raw text out of a binary file, a concern that simply does not exist when the source is already plain text coming from an API.
+
 <a name="step-2-code-langchain_"></a>
 
 ---
@@ -313,6 +319,13 @@ chunks      = splitter.split_documents([document])
 - `splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)` sets the size of each chunk (800 characters) and the overlap between consecutive chunks (100 characters), the same overlap logic used in the manual `legal-doc-rag-summarizer` project.
 
 - `chunks = splitter.split_documents([document])` takes a list of `Document` objects and returns a list of smaller `Document` objects, each one already carrying the original document's metadata (`title`, `url`) copied automatically.
+
+<br>
+
+> 🗺️ legal-doc-rag-summarizer [Part 02 - Divide and Conquer: Chunking the Document](https://github.com/hasff/legal-doc-rag-summarizer#part-2)
+>
+> You can see the different strategies on chunking
+
 
 <a name="step-3-code-langchain_"></a>
 
@@ -341,6 +354,12 @@ embeddings_model = OpenAIEmbeddings()
 - `load_dotenv` comes from `python dotenv`, `load_dotenv()` reads the `.env` file and exposes `OPENAI_API_KEY` to the process.
 
 - `embeddings_model = OpenAIEmbeddings()` creates the instance that will generate the vectors, using OpenAI's default embedding model. This is the same step that, in the manual project, was done for free with a local HuggingFace model. Here, the framework hides that same step behind a different class name, but the underlying tradeoff (free and local versus paid and remote) does not go away.
+
+<br>
+
+> 🗺️ legal-doc-rag-summarizer [Part 03 - Finding What Matters: Vector Search with Embeddings](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
+>
+> I did vector search and embeddings in the same part 03! Something worth noting is that I did it for free with HuggingFace SentenceTransformer and here we used OpenAIEmbeddings (paid)
 
 <a name="step-4-code-langchain_"></a>
 
@@ -371,6 +390,13 @@ vector_store = InMemoryVectorStore.from_documents(
 
     ⚠️ There is no separate "generate embeddings" step followed by "store them"; LangChain merges both into one idiomatic call.
 
+<br>
+
+> 🗺️ legal-doc-rag-summarizer [Part 03 - Finding What Matters: Vector Search with Embeddings](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
+> 
+> `legal-doc-rag-summarizer` never introduces a dedicated vector store. Part 03 keeps every chunk embedding in a plain Python list and performs cosine similarity by hand inside `vector_search`, with no persistence layer at all. In the final Streamlit version (Part 08), that same list of embeddings is simply cached in `st.session_state` so it survives between reruns, the closest the manual project gets to what `InMemoryVectorStore.from_documents` does here in a single call.
+
+
 <a name="step-5-code-langchain_"></a>
 
 ---
@@ -400,6 +426,12 @@ print(f'Result: \n{query_related_chunks}')
 - `vector_store.similarity_search(query, k=5)` embeds the query internally and returns the 5 `Document` objects (chunks) with the highest similarity. All the query embedding and similarity comparison work stays hidden inside this single method.
 
 - `query_related_chunks = "\n\n---\n\n".join([doc.page_content for doc in result])` joins the text (`doc.page_content`) of every returned chunk, separated by `---`, for readable printing.
+
+<br>
+
+> 🗺️ legal-doc-rag-summarizer [Part 03 - Finding What Matters: Vector Search with Embeddings](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
+>
+> Part 03 covers only vector search over that manually built list. To see the rest of the comparison, Part 04 layers BM25 keyword search on top, and Part 05 merges both rankings with Reciprocal Rank Fusion, a hybrid step this LangChain example does not attempt on its own, since `similarity_search` relies on embeddings alone.
 
 <a name="run-it-langchain_"></a>
 
@@ -706,20 +738,39 @@ Being visible with the naked eye in Earth's sky as a red wandering star, Mars ha
 
 #### ⚡ Quick Navigation: [⬅️ `example_llamaindex.py`](#example-llamaindex_) | [Conclusions ➡️](#conclusions_)
 
+Walking through the same five steps twice, once per framework, surfaces more differences than a side by side read of the code suggests. This section pulls those differences together. First the chunking mismatch that turned out to matter more than a quick look implies, then a broader table covering imports, storage and naming, and finally a closer look at naming clarity itself, the one dimension where the two frameworks diverged the most.
+
+<br>
+
 💡 **Note on chunking**
 
-The examples use different chunking strategies by default: LlamaIndex splits by sentence (`SentenceSplitter`), LangChain splits by character (`RecursiveCharacterTextSplitter`). This explains why LlamaIndex chunks tend to be larger even with the same `chunk_size`.
+The examples use different chunking strategies by default, and the difference goes deeper than it looks on the page. LlamaIndex's `SentenceSplitter` measures `chunk_size` and `chunk_overlap` in tokens, and prefers not to cut a sentence midway. LangChain's `RecursiveCharacterTextSplitter` measures both in characters. So the same number, `800`, means two very different things: roughly 800 characters on the LangChain side, and roughly 800 tokens (well over 3000 characters of English text) on the LlamaIndex side. This unit mismatch, not the sentence boundary preference, is the main reason LlamaIndex chunks come out noticeably larger.
 
-There are ways to bring both behaviours closer together (`NLTKTextSplitter` / `SpacyTextSplitter` in LangChain for sentence splitting, `TokenTextSplitter` in LlamaIndex to approximate char based splitting), but none of them faithfully replicate the other library's behaviour without extra dependencies or losing precision in chunk size. Each library was kept with its own default.
+Each library was kept with its own default rather than trying to force one to imitate the other.
 
-TODO: comparison table (setup, default chunking, vector store, query API, verbosity).
+Chunking was not the only place the two frameworks diverged. The table below lays out the rest, side by side.
 
 | | LangChain | LlamaIndex |
 |---|---|---|
 | Default chunking | By character | By sentence |
+| `chunk_size` unit | Characters | Tokens |
+| Import namespace | Scattered across separate top level packages (`langchain_core`, `langchain_text_splitters`, `langchain_openai`) | Consolidated under one top level package (`llama_index.*`) |
 | Vector store | `InMemoryVectorStore` | `VectorStoreIndex` |
 | Query API | `similarity_search` | `as_retriever().retrieve()` |
+| Naming clarity (1 to 5, 5 = most self explanatory) | 5 | 3 |
 
+
+> 💡 **Naming clarity, step by step**
+>
+> | Step | LangChain | Score | LlamaIndex | Score |
+> |---|---|---|---|---|
+> | Chunking | `RecursiveCharacterTextSplitter` (tells exactly what it does), `split_documents` (again no doubt about what it will do)  | 5 | `SentenceSplitter` (misleadingly suggests sentence count), `get_nodes_from_documents` (the intention here is not clear, we just know it gets something from the documents) | 2 |
+> | Vector store | `InMemoryVectorStore` (we know it's a vector store in memory) | 5 | `VectorStoreIndex` (name does not reveal in memory default nor the swappable backend) | 3 |
+> | Query | `similarity_search` (straight to the point) | 5 | `as_retriever()`, `retriever.retrieve()` (an extra, less obvious step) | 3 |
+>
+> This is a subjective read, shaped by which vocabulary already feels familiar to a given developer, not an objective ranking of the frameworks. It is also a small sample, three steps from one toy script, not a full audit of either framework's API surface.
+>
+> Still, it is tempting to read a pattern into it. LangChain, at least here, feels designed more from the user's perspective: it abstracts its internals and lets you work at a higher level. LlamaIndex, at least here, feels designed more from the perspective of its own architecture, exposing more of what is happening underneath.
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
