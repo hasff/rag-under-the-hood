@@ -21,7 +21,8 @@ Then you do the exact same thing again, this time with a different framework, an
 
 That's this whole project. Same data, same question, two frameworks, side by side: 🔗 LangChain vs 🦙 LlamaIndex.
 
-This is also a companion piece to my [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer) project, where every RAG step (chunking, embeddings, vector search, BM25, hybrid retrieval) is built manually, from scratch. Here, the same steps are handed off to LangChain and LlamaIndex, so you can see what a framework does for you versus what you'd otherwise build yourself.
+⚖️ This is also a companion piece to my [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer) project, where every RAG step (chunking, embeddings, vector search, BM25, hybrid retrieval) is built manually, from scratch. Here, the same steps are handed off to LangChain and LlamaIndex, so you can see what a framework does for you versus what you'd otherwise build yourself.
+
 
 ![LangChain vs LlamaIndex example in action](assets/intro/screenshot_intro.png)
 *A quick look at both scripts answering the same question about Mars.*
@@ -266,7 +267,10 @@ langchain-vs-llamaindex-rag-basics/
 
 📒 We load a Wikipedia page (Mars) and wrap it in a `Document` object, the standard entry point LangChain uses for any RAG pipeline.
 
-> Compare with [🦙 LlamaIndex Step 1](#step-1-code-llamaindex_)
+> 🦙 Compare with [LlamaIndex Step 1](#step-1-code-llamaindex_)
+>
+> ⚖️ Manual equivalent: [legal-doc-rag-summarizer, Part 01](https://github.com/hasff/legal-doc-rag-summarizer#part-1)
+
 
 ```python
 # STEP 1 - LOAD DATA ----------------------------------------------------------------------------
@@ -291,9 +295,7 @@ document    = Document(page_content=page.content, metadata={"title": page.title,
 
 <br>
 
-> 🗺️ legal-doc-rag-summarizer [Part 01 - The Naive Approach: Sending the Whole PDF to Claude](https://github.com/hasff/legal-doc-rag-summarizer#part-1)
->
-> Note that `legal-doc-rag-summarizer` works with uploaded PDF files rather than a Wikipedia page, so `extract_text_from_pdf` plays the role `wikipedia.page()` plays here. The manual project even needs `pdfplumber` to pull raw text out of a binary file, a concern that simply does not exist when the source is already plain text coming from an API.
+> ⚖️ **legal-doc-rag-summarizer** works with uploaded PDF files rather than a Wikipedia page, so `extract_text_from_pdf` plays the role `wikipedia.page()` plays here. The manual project even needs `pdfplumber` to pull raw text out of a binary file, a concern that simply does not exist when the source is already plain text coming from an API.
 
 <a name="step-2-code-langchain_"></a>
 
@@ -303,7 +305,9 @@ document    = Document(page_content=page.content, metadata={"title": page.title,
 
 📒 We split the full page text into smaller, overlapping pieces using LangChain's native `RecursiveCharacterTextSplitter`.
 
-> Compare with [🦙 LlamaIndex Step 2](#step-2-code-llamaindex_)
+> 🦙 Compare with [LlamaIndex Step 2](#step-2-code-llamaindex_)
+>
+> ⚖️ Manual equivalent: [legal-doc-rag-summarizer, Part 02](https://github.com/hasff/legal-doc-rag-summarizer#part-2)
 
 ```python
 # STEP 2 - CHUNKING ------------------------------------------------------------------------------
@@ -322,10 +326,7 @@ chunks      = splitter.split_documents([document])
 
 <br>
 
-> 🗺️ legal-doc-rag-summarizer [Part 02 - Divide and Conquer: Chunking the Document](https://github.com/hasff/legal-doc-rag-summarizer#part-2)
->
-> You can see the different strategies on chunking
-
+> ⚖️ **legal-doc-rag-summarizer** dedicates its entire Part 02 to chunking on its own. It shows what goes wrong with naive, non overlapping chunks (a sentence split mid way, a subject losing its meaning), then builds up to overlap as the fix. It also compares four chunking strategies, size based, word based, sentence based, and structure based, with a table of pros and cons for each. It is not a production grade implementation, and it does not need to be: its value is showing, up close, the exact pains that `RecursiveCharacterTextSplitter` quietly handles for you here. Worth a read if you want to feel those pains once, before letting the framework abstract them away.
 
 <a name="step-3-code-langchain_"></a>
 
@@ -335,7 +336,9 @@ chunks      = splitter.split_documents([document])
 
 📒 We set up the OpenAI embedding model, responsible for turning each chunk into a vector.
 
-> Compare with [🦙 LlamaIndex Step 3](#step-3-code-llamaindex_)
+> 🦙 Compare with [LlamaIndex Step 3](#step-3-code-llamaindex_)
+>
+> ⚖️ Manual equivalent: [legal-doc-rag-summarizer, Part 03](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
 
 ```python
 # STEP 3 - EMBEDDING MODEL -----------------------------------------------------------------------
@@ -357,9 +360,10 @@ embeddings_model = OpenAIEmbeddings()
 
 <br>
 
-> 🗺️ legal-doc-rag-summarizer [Part 03 - Finding What Matters: Vector Search with Embeddings](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
+> ⚖️ **legal-doc-rag-summarizer** loads its embedding model the exact same way, one line, before any chunk gets touched:
 >
-> I did vector search and embeddings in the same part 03! Something worth noting is that I did it for free with HuggingFace SentenceTransformer and here we used OpenAIEmbeddings (paid)
+> - `embeddings_model = SentenceTransformer('all-MiniLM-L6-v2')`, a free, local model instead of a paid API call
+> - The tradeoff is real, not just theoretical: local means no per request cost and no network dependency, but also a smaller, more general purpose model than what OpenAI serves
 
 <a name="step-4-code-langchain_"></a>
 
@@ -369,7 +373,9 @@ embeddings_model = OpenAIEmbeddings()
 
 📒 We store the chunks and their vectors in an in memory vector store, ready to be searched.
 
-> Compare with [🦙 LlamaIndex Step 4](#step-4-code-llamaindex_)
+> 🦙 Compare with [LlamaIndex Step 4](#step-4-code-llamaindex_)
+>
+> ⚖️ Manual equivalent: [legal-doc-rag-summarizer, Part 03](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
 
 ```python
 # STEP 4 - EMBEDDING + In Memory Store ------------------------------------------------------------
@@ -392,9 +398,11 @@ vector_store = InMemoryVectorStore.from_documents(
 
 <br>
 
-> 🗺️ legal-doc-rag-summarizer [Part 03 - Finding What Matters: Vector Search with Embeddings](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
-> 
-> `legal-doc-rag-summarizer` never introduces a dedicated vector store. Part 03 keeps every chunk embedding in a plain Python list and performs cosine similarity by hand inside `vector_search`, with no persistence layer at all. In the final Streamlit version (Part 08), that same list of embeddings is simply cached in `st.session_state` so it survives between reruns, the closest the manual project gets to what `InMemoryVectorStore.from_documents` does here in a single call.
+> ⚖️ **legal-doc-rag-summarizer** shows the embedding step out in the open, `InMemoryVectorStore.from_documents` hides it. In Part 03 you can see:
+>
+> - `embed_texts(chunks)`, the exact call `InMemoryVectorStore.from_documents` makes internally but never exposes, in LangChain it stays invisible, in `legal-doc-rag-summarizer` it is a visible function you call yourself, chunks in, vectors out
+> - No vector store behind those vectors, just a plain Python list, kept in memory alongside the chunks it belongs to
+> - No smarter indexing either, searching that list later means comparing the query against every single vector by hand, `InMemoryVectorStore` almost certainly does something less naive under the hood
 
 
 <a name="step-5-code-langchain_"></a>
@@ -405,7 +413,9 @@ vector_store = InMemoryVectorStore.from_documents(
 
 📒 We ask the vector store the same question and look at which chunks come back.
 
-> Compare with [🦙 LlamaIndex Step 5](#step-5-code-llamaindex_)
+> 🦙 Compare with [LlamaIndex Step 5](#step-5-code-llamaindex_)
+>
+> ⚖️ Manual equivalent: [legal-doc-rag-summarizer, Part 03](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
 
 ```python
 # STEP 5 - QUERY DATA ----------------------------------------------------------------------------
@@ -429,9 +439,12 @@ print(f'Result: \n{query_related_chunks}')
 
 <br>
 
-> 🗺️ legal-doc-rag-summarizer [Part 03 - Finding What Matters: Vector Search with Embeddings](https://github.com/hasff/legal-doc-rag-summarizer#part-3)
+> ⚖️ **legal-doc-rag-summarizer** never merges query embedding and searching into one call the way `similarity_search` does. Part 03 keeps `embed_query` and `vector_search` as two separate, visible steps. In legal-doc-rag-summarizer you can see:
 >
-> Part 03 covers only vector search over that manually built list. To see the rest of the comparison, Part 04 layers BM25 keyword search on top, and Part 05 merges both rankings with Reciprocal Rank Fusion, a hybrid step this LangChain example does not attempt on its own, since `similarity_search` relies on embeddings alone.
+> - `embed_query(query)` converting the question into a vector, then `vector_search` comparing it against every chunk by hand, the two things `similarity_search` bundles into a single line in LangChain
+> - Vector search alone is not the final word there, Part 04 adds BM25 keyword search on top, and Part 05 merges both rankings with Reciprocal Rank Fusion, a hybrid retrieval step `similarity_search` does not attempt, since it relies on embeddings alone
+> - That same retrieval setup carried into a real app in Part 08, chunks, embeddings and the BM25 index are computed once and cached in Streamlit's session state, so every query afterwards reuses them instead of recomputing from scratch
+
 
 <a name="run-it-langchain_"></a>
 
@@ -511,7 +524,7 @@ The environmental conditions on Mars are a challenge to sustaining organic life:
 
 📒 We load the same Wikipedia page (Mars) and wrap it in a `Document` object, now using LlamaIndex's own class.
 
-> Compare with [🔗 LangChain Step 1](#step-1-code-langchain_)
+> 🔗 Compare with [LlamaIndex Step 1](#step-1-code-langchain_)
 
 ```python
 # STEP 1 - LOAD DATA ----------------------------------------------------------------------------
@@ -530,6 +543,10 @@ document    = Document(text=page.content, metadata={"title": page.title, "url": 
 
 - `document = Document(text=page.content, metadata={...})` wraps the text and metadata the same conceptual way, but the text parameter is called `text` instead of `page_content`. Same idea, different naming between libraries.
 
+<br>
+
+> ⚖️ Same manual counterpart as [🔗 LangChain Step 1](#step-1-code-langchain_), see there for the `legal-doc-rag-summarizer` comparison.
+
 <a name="step-2-code-llamaindex_"></a>
 
 ---
@@ -538,7 +555,7 @@ document    = Document(text=page.content, metadata={"title": page.title, "url": 
 
 📒 We split the text into nodes using LlamaIndex's native `SentenceSplitter`, which respects sentence boundaries instead of cutting at a fixed character count.
 
-> Compare with [🔗 LangChain Step 2](#step-2-code-langchain_)
+> 🔗 Compare with [LangChain Step 2](#step-2-code-langchain_)
 
 ```python
 # STEP 2 - CHUNKING ------------------------------------------------------------------------------
@@ -556,6 +573,11 @@ nodes       = splitter.get_nodes_from_documents([document])
 
 - `nodes = splitter.get_nodes_from_documents([document])` returns a list of nodes, LlamaIndex's term for what LangChain calls chunks (`Document` objects).
 
+<br>
+
+> ⚖️ Same manual counterpart as [🔗 LangChain Step 2](#step-2-code-langchain_), see there for the `legal-doc-rag-summarizer` comparison. The sentence based row in that project's chunking strategies table applies here even more directly than it did for the character based splitter.
+
+
 <a name="step-3-code-llamaindex_"></a>
 
 ---
@@ -564,7 +586,7 @@ nodes       = splitter.get_nodes_from_documents([document])
 
 📒 We set up the OpenAI embedding model, now using LlamaIndex's own class.
 
-> Compare with [🔗 LangChain Step 3](#step-3-code-langchain_)
+> 🔗 Compare with [LangChain Step 3](#step-3-code-langchain_)
 
 ```python
 # STEP 3 - EMBEDDING MODEL -----------------------------------------------------------------------
@@ -584,6 +606,11 @@ embeddings_model = OpenAIEmbedding()
 
 - `embeddings_model = OpenAIEmbedding()` creates the default instance of the embedding model, the functional equivalent of Step 3 in LangChain.
 
+<br>
+
+> ⚖️ Same manual counterpart as [🔗 LangChain Step 3](#step-3-code-langchain_), see there for the `legal-doc-rag-summarizer` comparison, the same local versus paid tradeoff applies here.
+
+
 <a name="step-4-code-llamaindex_"></a>
 
 ---
@@ -592,7 +619,7 @@ embeddings_model = OpenAIEmbedding()
 
 📒 We build the in memory vector index from the nodes, a single step that both embeds and stores at once.
 
-> Compare with [🔗 LangChain Step 4](#step-4-code-langchain_)
+> 🔗 Compare with [LangChain Step 4](#step-4-code-langchain_)
 
 ```python
 # STEP 4 - EMBEDDING + In Memory Store ------------------------------------------------------------
@@ -609,6 +636,11 @@ index = VectorStoreIndex(
 
 - `VectorStoreIndex(nodes=nodes, embed_model=embeddings_model)` is the direct equivalent of LangChain's `InMemoryVectorStore.from_documents(...)`: it takes the nodes (LlamaIndex's name for what LangChain calls chunks), embeds each one with `embeddings_model`, and stores everything in an in memory index. The naming changes (🦙`index` instead of 🔗`vector_store`), but the role in the pipeline is the same.
 
+<br>
+
+> ⚖️ Same manual counterpart as [🔗 LangChain Step 4](#step-4-code-langchain_), see there for the `legal-doc-rag-summarizer` comparison, the embedding step stays just as hidden here as it does in LangChain.
+
+
 <a name="step-5-code-llamaindex_"></a>
 
 ---
@@ -617,7 +649,7 @@ index = VectorStoreIndex(
 
 📒 We ask the index the same question, through a retriever, and compare the nodes that come back.
 
-> Compare with [🔗 LangChain Step 5](#step-5-code-langchain_)
+> 🔗 Compare with [LangChain Step 5](#step-5-code-langchain_)
 
 ```python
 # STEP 5 - QUERY DATA ----------------------------------------------------------------------------
@@ -640,6 +672,11 @@ print(f'Result: \n{query_related_chunks}')
 - `result = retriever.retrieve(query)` embeds the query internally and returns the 5 most relevant nodes.
 
 - `query_related_chunks = "\n\n---\n\n".join([node.get_content() for node in result])` extracts the text of every node with `get_content()` and joins the results with `---`, the same printing pattern used in the LangChain example.
+
+<br>
+
+> ⚖️ Same manual counterpart as [🔗 LangChain Step 5](#step-5-code-langchain_), see there for the full `legal-doc-rag-summarizer` comparison (BM25, hybrid retrieval, Streamlit caching). One detail worth calling out here specifically: splitting `as_retriever()` from `retrieve(query)` mirrors the manual project's own separation between `embed_query` and `vector_search`, two distinct steps, closer to that structure than LangChain's single `similarity_search` call.
+
 
 <a name="run-it-llamaindex_"></a>
 
