@@ -819,7 +819,24 @@ Chunking was not the only place the two frameworks diverged. The table below lay
 
 #### ⚡ Quick Navigation: [⬅️ LangChain vs LlamaIndex comparison](#langchain-vs-llamaindex_) | [Next Steps & Resources ➡️](#next-steps--resources_)
 
-TODO.
+This project was kept intentionally simple on purpose. The goal was never to build a sophisticated RAG pipeline, or to conclude that 🔗 LangChain is better than 🦙 LlamaIndex, or vice versa. The intent was to serve two purposes: map cleanly against the manual implementation in `legal-doc-rag-summarizer`, and put 🔗 LangChain and 🦙 LlamaIndex side by side on the same task.
+
+That is the real takeaway here. Frameworks like 🔗 LangChain and 🦙 LlamaIndex exist to abstract away the plumbing we built by hand in `legal-doc-rag-summarizer`: chunking loops, embedding calls, cosine similarity, BM25 indexing, rank fusion, and managing the vector store itself. With a framework, similarity search is just a method call, `.similarity_search()` or `.as_retriever()`, no manual cosine math, no in memory list of vectors to manage by hand. Worth remembering: cosine similarity, the approach used in `legal-doc-rag-summarizer`, is just one option among several, dot product and Euclidean distance are common alternatives, and different vector stores support different choices. Once you have built that plumbing yourself even once, using a framework stops feeling like magic and starts feeling like a shortcut you understand.
+
+That is the value of doing both. Building it manually first teaches you what the framework is actually doing under the hood. Using the framework afterward teaches you what you gain by not doing it yourself every time: less boilerplate, sane defaults, and a common vocabulary shared across the RAG ecosystem.
+
+Neither approach is "better" in isolation, at least not for a project this small. For pure text RAG the two are close enough that the choice barely matters, but 🦙 LlamaIndex does carry more built in structure for multimodal retrieval, images especially, worth knowing if your next project moves past plain text.
+
+| | Manual implementation | Framework (🔗 LangChain / 🦙 LlamaIndex) |
+|---|---|---|
+| Control | Full, every step is explicit | Abstracted behind the API |
+| Learning value | High, forces you to understand each piece | Lower, unless you dig into the internals |
+| Speed to build | Slower | Faster |
+| Maintenance | You own every bug | Framework absorbs common bugs, adds its own surface area |
+| Best for | Learning, highly custom pipelines | Production speed, standard RAG patterns |
+
+On 🔗 LangChain versus 🦙 LlamaIndex specifically, the previous section already covers the practical differences (chunking strategy, embedding store setup, retrieval API). There is no need to repeat that comparison here. The point of this conclusion is the broader one: know how RAG works underneath, then pick whichever framework, or no framework at all, fits the job in front of you.
+
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
@@ -831,7 +848,33 @@ TODO.
 
 #### ⚡ Quick Navigation: [⬅️ Conclusions](#conclusions_) | [Get in Touch ➡️](#get-in-touch_)
 
-TODO: suggestions (swap Wikipedia for PDFs, try another embedding model, connect this to the legal doc RAG project, etc.)
+This project served its purpose: understand what 🔗 LangChain and 🦙 LlamaIndex are actually doing before moving on to more advanced RAG work.
+
+A few ways to take `rag-under-the-hood` further, if you want to keep experimenting before moving on:
+
+- **Swap Wikipedia for PDFs.** Point both loaders at real legal documents, ideally the same ones used in `legal-doc-rag-summarizer`, and compare retrieval quality side by side against the manual hybrid pipeline.
+- **Try a different embedding model.** Both examples use OpenAI embeddings here. Swapping in a local `sentence-transformers` model, the same one used in `legal-doc-rag-summarizer`, would make the two projects even more directly comparable.
+- **Add BM25 or hybrid retrieval to the frameworks.** Both LangChain and LlamaIndex support hybrid search through specific retrievers or vector store integrations. Wiring that up here would close the loop with Part 04 and Part 05 of `legal-doc-rag-summarizer`.
+- **Connect the two projects explicitly.** A short bridge section, or even a follow up post, mapping each step of `legal-doc-rag-summarizer` to its framework equivalent here, chunking to chunking, retrieval to retrieval, would tie the manual and framework approaches together for anyone reading both.
+
+<br>
+
+**LangChain and LlamaIndex**
+- 🔗 [LangChain Documentation](https://python.langchain.com/)
+- 🦙 [LlamaIndex Documentation](https://docs.llamaindex.ai/)
+
+<br>
+
+**DeepLearning\.AI course**
+
+For a deeper dive, DeepLearning\.AI's [Retrieval Augmented Generation (RAG)](https://www.deeplearning.ai/courses/retrieval-augmented-generation) course covers vector databases, hybrid search, and production RAG in more depth than this project. I haven't taken it yet, but it's on my list for sure.
+
+<br>
+
+**Want to keep going?**
+
+This project is a companion to [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer), where the same RAG concepts are built entirely by hand, no frameworks involved.
+
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
