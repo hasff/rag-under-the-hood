@@ -286,10 +286,7 @@ from langchain_core.documents import Document
 
 
 page        = wikipedia.page(title="Mars", auto_suggest=False)
-document    = Document(
-    page_content=page.content, 
-    metadata={"title": page.title, "url": page.url}
-    )
+document    = Document(page_content=page.content, metadata={"title": page.title, "url": page.url})
 ```
 
 - `import wikipedia` brings in the library that makes the request to Wikipedia. 
