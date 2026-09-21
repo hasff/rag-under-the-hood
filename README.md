@@ -76,7 +76,7 @@ Before you dive in, keep a few things in mind:
 
 #### ⚡ Quick Navigation: [⬅️ Table of Contents](#table-of-contents_) | [Project Architecture ➡️](#project-architecture_)
 
-This is a simple example, not a full framework tutorial. The goal is narrow on purpose: run the same five step RAG flow (load, chunk, embed, store, query) once in LangChain and once in LlamaIndex, using the same data source and the same question, and let the code speak for itself.
+This is a simple example, not a full framework tutorial. The goal is narrow on purpose: run the same five step RAG flow (load, chunk, embed, store, query) once in 🔗 LangChain and once in 🦙 LlamaIndex, using the same data source and the same question, and let the code speak for itself.
  
 It's a companion piece to [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer), where every RAG step is built manually, from scratch. Here, those same steps are handed off to a framework, so you can compare "build it yourself" against "let the framework do it" and see where each library's abstractions actually help.
 
