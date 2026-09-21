@@ -813,7 +813,7 @@ Chunking was not the only place the two frameworks diverged. The table below lay
 >
 > This is a subjective read, shaped by which vocabulary already feels familiar to a given developer, not an objective ranking of the frameworks. It is also a small sample, three steps from one toy script, not a full audit of either framework's API surface.
 >
-> Still, it is tempting to read a pattern into it. LangChain, at least here, feels designed more from the user's perspective: it abstracts its internals and lets you work at a higher level. LlamaIndex, at least here, feels designed more from the perspective of its own architecture, exposing more of what is happening underneath.
+> Still, it is tempting to read a pattern into it. 🔗 LangChain, at least here, feels designed more from the user's perspective: it abstracts its internals and lets you work at a higher level. 🦙 LlamaIndex, at least here, feels designed more from the perspective of its own architecture, exposing more of what is happening underneath.
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
