@@ -224,8 +224,3 @@ NOTES.md
 
 /my_notes/
 
-
-# uv
-.python-version
-uv.lock
-pyproject.toml
