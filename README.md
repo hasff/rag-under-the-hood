@@ -232,14 +232,19 @@ uv run example_langchain.py
 #### ⚡ Quick Navigation: [⬅️ Setup](#setup_) | [`example_langchain.py` ➡️](#example-langchain_)
 
 ```
-langchain-vs-llamaindex-rag-basics/
+rag-under-the-hood/
 ├── .env.example
 ├── .gitignore
+├── .python-version
+├── LICENSE
 ├── README.md
+├── pyproject.toml
+├── uv.lock
 ├── requirements.txt
 ├── example_langchain.py
 └── example_llamaindex.py
 ```
+
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
