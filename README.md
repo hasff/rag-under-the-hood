@@ -878,7 +878,7 @@ A few ways to take `rag-under-the-hood` further, if you want to keep experimenti
 
 **DeepLearning\.AI course**
 
-For a deeper dive, DeepLearning\.AI's [Retrieval Augmented Generation (RAG)](https://www.deeplearning.ai/courses/retrieval-augmented-generation) course covers vector databases, hybrid search, and production RAG in more depth than this project. I haven't taken it yet, but it's on my list for sure.
+For a deeper dive, DeepLearning\.AI's [Retrieval Augmented Generation (RAG)](https://www.deeplearning.ai/courses/retrieval-augmented-generation) course covers vector databases, hybrid search, and production RAG in more depth than this project. Free to take, the certificate is the only thing that costs money. I haven't taken it yet, but it's on my list for sure.
 
 <br>
 
