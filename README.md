@@ -805,7 +805,7 @@ Chunking was not the only place the two frameworks diverged. The table below lay
 
 > 💡 **Naming clarity, step by step**
 >
-> | Step | LangChain | Score | LlamaIndex | Score |
+> | Step | 🔗 LangChain | Score | 🦙 LlamaIndex | Score |
 > |---|---|---|---|---|
 > | Chunking | `RecursiveCharacterTextSplitter` (tells exactly what it does), `split_documents` (again no doubt about what it will do)  | 5 | `SentenceSplitter` (misleadingly suggests sentence count), `get_nodes_from_documents` (the intention here is not clear, we just know it gets something from the documents) | 2 |
 > | Vector store | `InMemoryVectorStore` (we know it's a vector store in memory) | 5 | `VectorStoreIndex` (name does not reveal in memory default nor the swappable backend) | 3 |
