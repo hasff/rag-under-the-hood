@@ -866,8 +866,7 @@ A few ways to take `rag-under-the-hood` further, if you want to keep experimenti
 
 - **Swap Wikipedia for PDFs.** Point both loaders at real legal documents, ideally the same ones used in `legal-doc-rag-summarizer`, and compare retrieval quality side by side against the manual hybrid pipeline.
 - **Try a different embedding model.** Both examples use OpenAI embeddings here. Swapping in a local `sentence-transformers` model, the same one used in `legal-doc-rag-summarizer`, would make the two projects even more directly comparable.
-- **Add BM25 or hybrid retrieval to the frameworks.** Both LangChain and LlamaIndex support hybrid search through specific retrievers or vector store integrations. Wiring that up here would close the loop with Part 04 and Part 05 of `legal-doc-rag-summarizer`.
-- **Connect the two projects explicitly.** A short bridge section, or even a follow up post, mapping each step of `legal-doc-rag-summarizer` to its framework equivalent here, chunking to chunking, retrieval to retrieval, would tie the manual and framework approaches together for anyone reading both.
+- **Add BM25 or hybrid retrieval to the frameworks.** Both 🔗 LangChain and 🦙 LlamaIndex support hybrid search through specific retrievers or vector store integrations. Wiring that up here would close the loop with Part 04 and Part 05 of `legal-doc-rag-summarizer`.
 
 <br>
 
