@@ -787,13 +787,13 @@ Walking through the same five steps twice, once per framework, surfaces more dif
 
 💡 **Note on chunking**
 
-The examples use different chunking strategies by default, and the difference goes deeper than it looks on the page. LlamaIndex's `SentenceSplitter` measures `chunk_size` and `chunk_overlap` in tokens, and prefers not to cut a sentence midway. LangChain's `RecursiveCharacterTextSplitter` measures both in characters. So the same number, `800`, means two very different things: roughly 800 characters on the LangChain side, and roughly 800 tokens (well over 3000 characters of English text) on the LlamaIndex side. This unit mismatch, not the sentence boundary preference, is the main reason LlamaIndex chunks come out noticeably larger.
+The examples use different chunking strategies by default, and the difference goes deeper than it looks on the page. 🦙 LlamaIndex's `SentenceSplitter` measures `chunk_size` and `chunk_overlap` in tokens, and prefers not to cut a sentence midway. 🔗 LangChain's `RecursiveCharacterTextSplitter` measures both in characters. So the same number, `800`, means two very different things: roughly 800 characters on the 🔗 LangChain side, and roughly 800 tokens (well over 3000 characters of English text) on the 🦙 LlamaIndex side. This unit mismatch, not the sentence boundary preference, is the main reason 🦙 LlamaIndex chunks come out noticeably larger.
 
 Each library was kept with its own default rather than trying to force one to imitate the other.
 
 Chunking was not the only place the two frameworks diverged. The table below lays out the rest, side by side.
 
-| | LangChain | LlamaIndex |
+| | 🔗 LangChain | 🦙 LlamaIndex |
 |---|---|---|
 | Default chunking | By character | By sentence |
 | `chunk_size` unit | Characters | Tokens |
