@@ -833,7 +833,11 @@ That is the value of doing both. Building it manually first teaches you what the
 
 Neither approach is "better" in isolation, at least not for a project this small. For pure text RAG the two are close enough that the choice barely matters, but 🦙 LlamaIndex does carry more built in structure for multimodal retrieval, images especially, worth knowing if your next project moves past plain text.
 
-| | Manual implementation | Framework (🔗 LangChain / 🦙 LlamaIndex) |
+<br>
+
+Zooming out, the real contrast isn't 🔗 LangChain versus 🦙LlamaIndex, it's framework versus manual, the approach used in my [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer) project.
+
+| | ⚖️ Manual implementation | Framework (🔗 LangChain / 🦙 LlamaIndex) |
 |---|---|---|
 | Control | Full, every step is explicit | Abstracted behind the API |
 | Learning value | High, forces you to understand each piece | Lower, unless you dig into the internals |
