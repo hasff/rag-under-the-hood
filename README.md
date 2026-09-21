@@ -245,6 +245,7 @@ rag-under-the-hood/
 └── example_llamaindex.py
 ```
 
+Two files: `example_langchain.py` and `example_llamaindex.py` run the exact same RAG flow so you can compare them side by side.
 
 [↑ Back to Table of Contents](#table-of-contents_)
 
