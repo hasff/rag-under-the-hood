@@ -845,6 +845,8 @@ Zooming out, the real contrast isn't 🔗 LangChain versus 🦙LlamaIndex, it's 
 | Maintenance | You own every bug | Framework absorbs common bugs, adds its own surface area |
 | Best for | Learning, highly custom pipelines | Production speed, standard RAG patterns |
 
+<br>
+
 On 🔗 LangChain versus 🦙 LlamaIndex specifically, the previous section already covers the practical differences (chunking strategy, embedding store setup, retrieval API). There is no need to repeat that comparison here. The point of this conclusion is the broader one: know how RAG works underneath, then pick whichever framework, or no framework at all, fits the job in front of you.
 
 
