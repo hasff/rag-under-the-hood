@@ -3,7 +3,7 @@
 [![Sponsor hasff](https://img.shields.io/badge/Sponsor-hasff-brightgreen?logo=github-sponsors)](https://github.com/sponsors/hasff)
 [![Portfolio](https://img.shields.io/badge/Portfolio-AI%2FML%20Projects-blue?logo=github)](https://hasff.github.io/my-ai-portfolio/)
 
-> A practical, side by side comparison of the basic RAG building blocks (chunking, embeddings, vector store, retrieval) implemented with LangChain and with LlamaIndex.
+> A practical, side by side comparison of the basic RAG building blocks (chunking, embeddings, vector store, retrieval) implemented with 🔗 LangChain and with 🦙 LlamaIndex.
 
 > 💾 If this project looks useful, starring it now means you won't lose it later.
 
@@ -13,15 +13,15 @@
 
 ## Picture this
 
-You're curious about RAG, but you don't want to fight with PDFs or web scraping just to get a working example.
+You're curious about RAG, and you want the smallest possible example to see it work end to end.
 
 So you grab a Wikipedia page about Mars, split it into chunks, embed it, index it, and ask a simple question like *"What is the atmosphere of Mars made of?"*.
 
-Then you do the exact same thing again, this time with a different framework, and compare what comes back.
+Two popular frameworks, 🔗 LangChain and 🦙 LlamaIndex, let you build exactly that. So you try it with one, then do the exact same thing again with the other, and compare what comes back.
 
-That's this whole project. Same data, same question, two frameworks, side by side: 🔗 LangChain vs 🦙 LlamaIndex.
+That's this whole project: same data, same question, two frameworks, side by side.
 
-⚖️ This is also a companion piece to my [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer) project, where every RAG step (chunking, embeddings, vector search, BM25, hybrid retrieval) is built manually, from scratch. Here, the same steps are handed off to LangChain and LlamaIndex, so you can see what a framework does for you versus what you'd otherwise build yourself.
+⚖️ This is also a companion piece to my [legal-doc-rag-summarizer](https://github.com/hasff/legal-doc-rag-summarizer) project, where every RAG step (chunking, embeddings, vector search, BM25, hybrid retrieval) is built manually, from scratch. Here, the same steps are handed off to 🔗 LangChain and 🦙 LlamaIndex, so you can see what a framework does for you versus what you'd otherwise build yourself.
 
 
 ![LangChain vs LlamaIndex example in action](assets/intro/screenshot_intro.png)
