@@ -13,7 +13,7 @@
 
 ## Picture this
 
-You want to try RAG, but you don't want to fight with PDFs or scraping just to get started.
+You're curious about RAG, but you don't want to fight with PDFs or web scraping just to get a working example.
 
 So you grab a Wikipedia page about Mars, split it into chunks, embed it, index it, and ask a simple question like *"What is the atmosphere of Mars made of?"*.
 
