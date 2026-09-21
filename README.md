@@ -7,7 +7,7 @@
 
 > 💾 If this project looks useful, starring it now means you won't lose it later.
 
-🗓️ **Status: August 2026**
+🗓️ **Status: September 2026**
 
 ---
 
